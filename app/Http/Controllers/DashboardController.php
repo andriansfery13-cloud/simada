@@ -35,8 +35,8 @@ class DashboardController extends Controller
 
         // Statistik per bulan (6 bulan terakhir)
         $chartData = Kegiatan::select(
-                DB::raw('STRFTIME("%m", tanggal) as bulan'),
-                DB::raw('STRFTIME("%Y", tanggal) as tahun'),
+                DB::raw('MONTH(tanggal) as bulan'),
+                DB::raw('YEAR(tanggal) as tahun'),
                 DB::raw('COUNT(*) as total')
             )
             ->where('tanggal', '>=', now()->subMonths(6)->startOfMonth())
